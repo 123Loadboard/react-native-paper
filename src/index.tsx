@@ -38,7 +38,7 @@ export { default as Menu } from './components/Menu/Menu';
 export { default as Modal } from './components/Modal';
 export { default as Portal } from './components/Portal/Portal';
 export { default as ProgressBar } from './components/ProgressBar';
-export { default as RadioButton } from './components/RadioButton';
+export { default as RadioButton } from './components/RadioButton/RadioButton';
 export { default as Searchbar } from './components/Searchbar';
 export { default as Snackbar } from './components/Snackbar';
 export { default as Surface } from './components/Surface';
@@ -46,9 +46,7 @@ export { default as Switch } from './components/Switch';
 export { default as Appbar } from './components/Appbar/Appbar';
 export { default as TouchableRipple } from './components/TouchableRipple';
 export { default as TextInput } from './components/TextInput/TextInput';
-export {
-  default as ToggleButton,
-} from './components/ToggleButton/ToggleButton';
+export { default as ToggleButton } from './components/ToggleButton/ToggleButton';
 
 export { default as Caption } from './components/Typography/Caption';
 export { default as Headline } from './components/Typography/Headline';

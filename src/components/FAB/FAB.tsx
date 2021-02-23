@@ -110,6 +110,7 @@ class FAB extends React.Component<Props, State> {
   };
 
   componentDidUpdate(prevProps: Props) {
+    const { scale } = this.props.theme.animation;
     if (this.props.visible === prevProps.visible) {
       return;
     }
@@ -117,13 +118,13 @@ class FAB extends React.Component<Props, State> {
     if (this.props.visible) {
       Animated.timing(this.state.visibility, {
         toValue: 1,
-        duration: 200,
+        duration: 200 * scale,
         useNativeDriver: true,
       }).start();
     } else {
       Animated.timing(this.state.visibility, {
         toValue: 0,
-        duration: 150,
+        duration: 150 * scale,
         useNativeDriver: true,
       }).start();
     }
@@ -139,6 +140,7 @@ class FAB extends React.Component<Props, State> {
       disabled,
       onPress,
       theme,
+      testID,
       style,
       visible,
       loading,
@@ -200,6 +202,7 @@ class FAB extends React.Component<Props, State> {
           onPress={onPress}
           rippleColor={rippleColor}
           disabled={disabled}
+          testID={testID}
           accessibilityLabel={accessibilityLabel}
           accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
           accessibilityComponentType="button"

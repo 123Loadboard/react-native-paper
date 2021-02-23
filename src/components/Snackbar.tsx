@@ -26,6 +26,7 @@ type Props = {
   action?: {
     label: string;
     accessibilityLabel?: string;
+    testID?: string;
     onPress: () => void;
   };
   /**
@@ -45,6 +46,10 @@ type Props = {
    * @optional
    */
   theme: Theme;
+  /**
+   * testID for testing purposes applied to the main Snackbar box
+   */
+  testID?: string;
 };
 
 type State = {
@@ -166,9 +171,10 @@ class Snackbar extends React.Component<Props, State> {
     this.setState({
       hidden: false,
     });
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.opacity, {
       toValue: 1,
-      duration: 200,
+      duration: 200 * scale,
       useNativeDriver: true,
     }).start(({ finished }) => {
       if (finished) {
@@ -188,10 +194,10 @@ class Snackbar extends React.Component<Props, State> {
     if (this.hideTimeout) {
       clearTimeout(this.hideTimeout);
     }
-
+    const { scale } = this.props.theme.animation;
     Animated.timing(this.state.opacity, {
       toValue: 0,
-      duration: 100,
+      duration: 100 * scale,
       useNativeDriver: true,
     }).start(({ finished }) => {
       if (finished) {
@@ -203,7 +209,15 @@ class Snackbar extends React.Component<Props, State> {
   private hideTimeout?: number;
 
   render() {
-    const { children, visible, action, onDismiss, theme, style } = this.props;
+    const {
+      children,
+      visible,
+      action,
+      onDismiss,
+      theme,
+      style,
+      testID,
+    } = this.props;
     const { colors, roundness } = theme;
 
     if (this.state.hidden) {
@@ -213,6 +227,7 @@ class Snackbar extends React.Component<Props, State> {
     return (
       <SafeAreaView pointerEvents="box-none" style={styles.wrapper}>
         <Surface
+          testID={testID}
           pointerEvents="box-none"
           accessibilityLiveRegion="polite"
           style={
@@ -247,6 +262,7 @@ class Snackbar extends React.Component<Props, State> {
           </Text>
           {action ? (
             <Button
+              testID={action.testID}
               accessibilityLabel={action.accessibilityLabel}
               onPress={() => {
                 action.onPress();

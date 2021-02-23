@@ -5,6 +5,7 @@ import {
   ViewStyle,
   StyleSheet,
   StyleProp,
+  GestureResponderEvent,
 } from 'react-native';
 import color from 'color';
 import { withTheme } from '../../core/theming';
@@ -31,11 +32,11 @@ type Props = React.ComponentProps<typeof TouchableWithoutFeedback> & {
   /**
    * Function to execute on press. If not set, will cause the touchable to be disabled.
    */
-  onPress?: () => void | null;
+  onPress?: (event: GestureResponderEvent) => void | null;
   /**
    * Function to execute on long press.
    */
-  onLongPress?: () => void;
+  onLongPress?: (event: GestureResponderEvent) => void;
   /**
    * Color of the ripple effect (Android >= 5.0 and Web).
    */
@@ -91,7 +92,7 @@ class TouchableRipple extends React.Component<Props> {
   private handlePressIn = (e: any) => {
     const { centered, rippleColor, onPressIn, theme } = this.props;
 
-    onPressIn && onPressIn(e);
+    onPressIn?.(e);
 
     const { dark, colors } = theme;
     const calculatedRippleColor =
